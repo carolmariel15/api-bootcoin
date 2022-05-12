@@ -26,7 +26,7 @@ public class KafkaJsonConfig {
         return new DefaultKafkaProducerFactory<>(config);
     }
 
-    @Bean
+    @Bean(name = "kafkaJsonTemplate")
     public KafkaTemplate<String, Event<?>> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
