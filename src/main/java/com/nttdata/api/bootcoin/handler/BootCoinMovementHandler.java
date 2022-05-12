@@ -14,6 +14,8 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.UUID;
+
 @Component
 @AllArgsConstructor
 public class BootCoinMovementHandler {
@@ -52,14 +54,19 @@ public class BootCoinMovementHandler {
     }
 
     public Mono<ServerResponse> edit(ServerRequest serverRequest) {
-        return serverRequest.bodyToMono(BootCoinMovement.class).flatMap(v -> {
+        return serverRequest.bodyToMono(BootCoinMovement.class).filter(x->x.getAccepted()==true).flatMap(v -> {
             return bootCoinMovementRepository.findById(v.getId()).flatMap(c -> {
                 c.setAccepted(v.getAccepted());
-                return ServerResponse.status(HttpStatus.CREATED)
+                c.setTransactionNumber(UUID.randomUUID().toString());
+                return ServerResponse.status(HttpStatus.OK)
                         .contentType(MediaType.TEXT_EVENT_STREAM)
-                        .body(bootCoinMovementRepository.save(c), BootCoinMovement.class);
+                        .body(bootCoinMovementRepository.save(c)
+                                .subscribe(kafkaJsonProducer::sendBootcoinM),
+                                BootCoinMovement.class);
             }).switchIfEmpty(notFound);
-        });
+        }).switchIfEmpty(ServerResponse.status(HttpStatus.OK)
+                .contentType(MediaType.TEXT_EVENT_STREAM)
+                .body(serverRequest.bodyToMono(BootCoinMovement.class), BootCoinMovement.class));
     }
 
     public Mono<ServerResponse> delete(ServerRequest serverRequest) {
