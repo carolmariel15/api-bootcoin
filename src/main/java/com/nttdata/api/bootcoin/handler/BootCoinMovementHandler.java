@@ -86,7 +86,6 @@ public class BootCoinMovementHandler {
                 .map(x-> {
                     report.setId(x.getId());
                     report.setApplicantId(x.getApplicantId());
-                    report.setAmountBootCoin(x.getAmountBootCoin());
                     report.setAmount(x.getAmount());
                     report.setAccepted(x.getAccepted());
                     report.setOriginAccount(x.getOriginAccount());

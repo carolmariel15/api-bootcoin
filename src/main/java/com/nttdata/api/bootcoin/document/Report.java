@@ -11,7 +11,6 @@ public class Report {
 
     private Integer id;
     private String applicantId;
-    private Double amountBootCoin;
     private Double amount;
     private boolean accepted;
     private String originAccount;

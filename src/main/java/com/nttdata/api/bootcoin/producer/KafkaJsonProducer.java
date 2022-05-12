@@ -18,20 +18,20 @@ public class KafkaJsonProducer {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(KafkaJsonProducer.class);
 
-    private final KafkaTemplate<Integer, Event<?>> kafkaTemplate;
+    private final KafkaTemplate<String, Event<?>> kafkaTemplate;
 
-    public KafkaJsonProducer(@Qualifier("kafkaJsonTemplate") KafkaTemplate<Integer, Event<?>> kafkaTemplate) {
+    public KafkaJsonProducer(@Qualifier("kafkaTemplate") KafkaTemplate<String, Event<?>> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
     }
 
     public void sendBootcoinM(BootCoinMovement bm) {
-        LOGGER.info("Enviando solicitud ", bm);
+
         BootCoinMovementCreatedEvent created = new BootCoinMovementCreatedEvent();
         created.setData(bm);
         created.setId(UUID.randomUUID().toString());
         created.setType(EventType.CREATED);
         created.setDate(new Date());
-
+        LOGGER.info("Enviando solicitud ", bm);
         this.kafkaTemplate.send("topic-bootcoinm", created);
     }
 

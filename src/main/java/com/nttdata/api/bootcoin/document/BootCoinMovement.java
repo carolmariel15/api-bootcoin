@@ -17,7 +17,6 @@ public class BootCoinMovement {
     @Id
     private Integer id;
     private String applicantId;
-    private Double amountBootCoin;
     private Double amount;
     private Integer payMode;
     @Nullable
