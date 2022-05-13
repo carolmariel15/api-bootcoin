@@ -1,4 +1,4 @@
-package com.nttdata.api.bootcoin.document.router;
+package com.nttdata.api.bootcoin.router;
 
 import com.nttdata.api.bootcoin.handler.BootCoinMovementHandler;
 import org.springframework.context.annotation.Bean;
