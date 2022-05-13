@@ -13,13 +13,11 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.concurrent.atomic.AtomicReference;
 
 @Component
 @AllArgsConstructor
@@ -110,8 +108,8 @@ public class BootCoinMovementHandler {
                             .contentType(MediaType.TEXT_EVENT_STREAM).body(bootCoinMovementRepository.save(v),
                                     BootCoinMovement.class);
         }).switchIfEmpty(ServerResponse.status(HttpStatus.OK)
-                .contentType(MediaType.TEXT_EVENT_STREAM)
-                .body(serverRequest.bodyToMono(BootCoinMovement.class), BootCoinMovement.class));
+                .contentType(MediaType.valueOf(MediaType.TEXT_EVENT_STREAM_VALUE))
+                .bodyValue("La solicitud ya fue aceptada."));
     }
 
 }
