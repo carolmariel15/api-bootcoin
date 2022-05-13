@@ -9,9 +9,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Report {
 
-    private Integer id;
+    private String id;
     private String applicantId;
     private Double amount;
+    private String phone;
     private boolean accepted;
     private String originAccount;
     private String transactionNumber;

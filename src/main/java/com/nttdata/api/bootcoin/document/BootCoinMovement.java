@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 public class BootCoinMovement {
 
     @Id
-    private Integer id;
+    private String id;
     private String applicantId;
     private Double amount;
     private Integer payMode;

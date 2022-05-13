@@ -1,7 +1,7 @@
 package com.nttdata.api.bootcoin.config;
 
 
-import com.nttdata.api.bootcoin.events.Event;
+import com.nttdata.api.bootcoin.document.BootCoinMovement;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.context.annotation.Bean;
@@ -19,7 +19,7 @@ public class KafkaJsonConfig {
 
 
     @Bean
-    public ProducerFactory<String, Event<?>> producerFactory() {
+    public ProducerFactory<String, BootCoinMovement> producerFactory() {
         Map<String, Object> config = new HashMap<>();
         config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
         config.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
@@ -29,7 +29,7 @@ public class KafkaJsonConfig {
     }
 
     @Bean(name = "kafkaTemplate")
-    public KafkaTemplate<String, Event<?>> kafkaTemplate() {
+    public KafkaTemplate<String, BootCoinMovement> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
 

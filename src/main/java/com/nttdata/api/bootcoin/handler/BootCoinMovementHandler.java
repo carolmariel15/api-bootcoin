@@ -39,7 +39,7 @@ public class BootCoinMovementHandler {
     }
 
     public Mono<ServerResponse> getBMovement(ServerRequest serverRequest) {
-        var id = Integer.parseInt(serverRequest.pathVariable("id"));
+        var id = serverRequest.pathVariable("id");
         var bootCoinMovementMono = bootCoinMovementRepository.findById(id);
         return bootCoinMovementMono.flatMap(i -> ServerResponse.ok()
                         .contentType(MediaType.TEXT_EVENT_STREAM)
@@ -71,7 +71,7 @@ public class BootCoinMovementHandler {
     }
 
     public Mono<ServerResponse> delete(ServerRequest serverRequest) {
-        var id = Integer.parseInt(serverRequest.pathVariable("id"));
+        var id = serverRequest.pathVariable("id");
         return bootCoinMovementRepository.findById(id)
                 .flatMap(c -> ServerResponse.status(HttpStatus.OK)
                         .contentType(MediaType.TEXT_EVENT_STREAM)
@@ -85,7 +85,7 @@ public class BootCoinMovementHandler {
         var r = bootCoinMovementRepository.getByDestinationAccount(accountNumber)
                 .collectList()
                 .flatMapIterable(v -> {
-                    v.forEach(x -> rep.add(new Report(x.getId(), x.getApplicantId(), x.getAmount(),
+                    v.forEach(x -> rep.add(new Report(x.getId(), x.getApplicantId(), x.getAmount(), x.getPhone(),
                             x.getAccepted(), x.getAccountNumber(), x.getTransactionNumber())));
                     return rep;
                 });
@@ -97,7 +97,7 @@ public class BootCoinMovementHandler {
 
     public Mono<ServerResponse> acceptedRequest(ServerRequest serverRequest) {
         var accepted = Boolean.parseBoolean(serverRequest.pathVariable("accepted"));
-        var id = Integer.parseInt(serverRequest.pathVariable("id"));
+        var id = serverRequest.pathVariable("id");
 
         return bootCoinMovementRepository.findById(id).filter(x-> !x.getAccepted())
             .flatMap(v -> {

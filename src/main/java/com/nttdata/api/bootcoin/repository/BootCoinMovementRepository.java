@@ -8,7 +8,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Repository
-public interface BootCoinMovementRepository extends ReactiveMongoRepository<BootCoinMovement, Integer> {
+public interface BootCoinMovementRepository extends ReactiveMongoRepository<BootCoinMovement, String> {
 
     public Flux<BootCoinMovement> getByDestinationAccount(String destinationAccount);
 
