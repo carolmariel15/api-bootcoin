@@ -1,7 +1,7 @@
 package com.nttdata.api.bootcoin.producer;
 
 import com.nttdata.api.bootcoin.document.BootCoinMovement;
-import com.nttdata.api.bootcoin.events.BootCoinMovementCreatedEvent;
+import com.nttdata.api.bootcoin.events.CreatedEvent;
 import com.nttdata.api.bootcoin.events.Event;
 import com.nttdata.api.bootcoin.events.EventType;
 import org.slf4j.Logger;
@@ -26,7 +26,7 @@ public class KafkaJsonProducer {
 
     public void sendBootcoinM(BootCoinMovement bm) {
 
-        BootCoinMovementCreatedEvent created = new BootCoinMovementCreatedEvent();
+        CreatedEvent created = new CreatedEvent();
         created.setData(bm);
         created.setId(UUID.randomUUID().toString());
         created.setType(EventType.CREATED);
