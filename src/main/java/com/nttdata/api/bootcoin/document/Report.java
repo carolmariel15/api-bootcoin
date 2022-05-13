@@ -14,5 +14,6 @@ public class Report {
     private Double amount;
     private boolean accepted;
     private String originAccount;
+    private String transactionNumber;
 
 }

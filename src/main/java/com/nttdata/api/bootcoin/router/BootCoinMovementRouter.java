@@ -21,7 +21,8 @@ public class BootCoinMovementRouter {
                 .andRoute(POST("/bootcoin").and(accept(MediaType.TEXT_EVENT_STREAM)), bootCoinMovementHandler::create)
                 .andRoute(PUT("/bootcoin").and(accept(MediaType.TEXT_EVENT_STREAM)), bootCoinMovementHandler::edit)
                 .andRoute(DELETE("/bootcoin/{id}").and(accept(MediaType.TEXT_EVENT_STREAM)), bootCoinMovementHandler::delete)
-                .andRoute(GET("/bootcoin/{accountNumber}").and(accept(MediaType.TEXT_EVENT_STREAM)), bootCoinMovementHandler::listReport);
+                .andRoute(GET("/bootcoin/report/{accountNumber}").and(accept(MediaType.TEXT_EVENT_STREAM)), bootCoinMovementHandler::listReport)
+                .andRoute(PUT("/bootcoin/{id}/{accepted}").and(accept(MediaType.TEXT_EVENT_STREAM)), bootCoinMovementHandler::acceptedRequest);
     }
 
 }

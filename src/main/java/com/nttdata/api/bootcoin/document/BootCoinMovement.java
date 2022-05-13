@@ -21,14 +21,10 @@ public class BootCoinMovement {
     private Integer payMode;
     @Nullable
     private Boolean accepted;
-    @Nullable
+    @NotNull
     private String accountNumber;
     @Nullable
-    private String phone;
-    @Nullable
     private String transactionNumber;
-    @NotNull
-    private String originAccount;
     @NotNull
     private String destinationAccount;
 
