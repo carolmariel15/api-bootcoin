@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 
 /*pruebaaaaaaa*/
 
+/*comentario 2*/
+
 @Component
 public class KafkaJsonProducer {
 
